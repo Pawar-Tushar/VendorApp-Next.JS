@@ -29,6 +29,15 @@ export default function Navbar() {
                 </div>
                 <span className="text-sm font-medium text-gray-700">{session.user?.name}</span>
               </div>
+
+              {/* Go to Vendors Button */}
+              <Link
+                href="/vendors"
+                className="bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 hover:border-emerald-300 px-4 py-2 rounded-xl text-emerald-700 hover:text-emerald-800 font-medium transition-all duration-200"
+              >
+                Go to Vendors
+              </Link>
+
               <button
                 onClick={() => signOut()}
                 className="flex items-center gap-2 bg-red-50 hover:bg-red-100 border border-red-200 hover:border-red-300 px-4 py-2 rounded-xl text-red-600 hover:text-red-700 font-medium transition-all duration-200"
@@ -58,15 +67,24 @@ export default function Navbar() {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="sm:hidden mt-4 pt-4 border-t border-gray-200">
+        <div className="sm:hidden mt-4 pt-4 border-t border-gray-200 space-y-3">
           {session ? (
-            <div className="space-y-3">
+            <>
               <div className="flex items-center gap-3 px-3 py-2 rounded-xl bg-gray-50">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-r from-emerald-500 to-blue-500 flex items-center justify-center">
                   <User size={16} className="text-white" />
                 </div>
                 <span className="text-sm font-medium text-gray-700">{session.user?.name}</span>
               </div>
+
+              {/* Go to Vendors Button - Mobile */}
+              <Link
+                href="/vendors"
+                className="block text-center bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-4 py-2.5 rounded-xl text-emerald-700 font-medium"
+              >
+                Go to Vendors
+              </Link>
+
               <button
                 onClick={() => signOut()}
                 className="w-full flex items-center justify-center gap-2 bg-red-50 hover:bg-red-100 border border-red-200 px-4 py-2.5 rounded-xl text-red-600 font-medium"
@@ -74,7 +92,7 @@ export default function Navbar() {
                 <LogOut size={16} />
                 Logout
               </button>
-            </div>
+            </>
           ) : (
             <Link
               href="/api/auth/signin"
