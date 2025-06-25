@@ -8,7 +8,7 @@ import type { Vendor } from "@/types/vendor"
 import { Plus, Edit, Trash2, Building2, Users, Search, Filter } from "lucide-react"
 
 export default function VendorListPage() {
-  const { data: session, status } = useSession()
+  const { status } = useSession()
   const router = useRouter()
   const [vendors, setVendors] = useState<Vendor[]>([])
   const [loading, setLoading] = useState(true)
