@@ -8,6 +8,17 @@ export interface Vendor {
   city?: string;
   country?: string;
   zipCode?: string;
+  userId?: string;
   createdAt?: string;
   updatedAt?: string;
+}
+export interface VendorResponse {
+  vendors: Vendor[]
+  pagination: {
+    currentPage: number
+    totalPages: number
+    totalVendors: number
+    hasNextPage: boolean
+    hasPrevPage: boolean
+  }
 }

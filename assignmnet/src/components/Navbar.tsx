@@ -2,7 +2,7 @@
 
 import { useSession, signOut } from "next-auth/react"
 import Link from "next/link"
-import { User, LogOut, Menu, X } from "lucide-react"
+import { User, LogOut, Menu, X, FileText } from "lucide-react"
 import { useState } from "react"
 
 export default function Navbar() {
@@ -20,32 +20,33 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden sm:flex items-center gap-4">
+        <div className="hidden sm:flex items-center gap-6">
+          <Link href="/docs" className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors">
+            <FileText size={16} />
+            Documentation
+          </Link>
+
           {session ? (
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-3 px-4 py-2 rounded-xl bg-gray-50 border border-gray-200">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-emerald-500 to-blue-500 flex items-center justify-center">
-                  <User size={16} className="text-white" />
-                </div>
-                <span className="text-sm font-medium text-gray-700">{session.user?.name}</span>
-              </div>
-
-              {/* Go to Vendors Button */}
-              <Link
-                href="/vendors"
-                className="bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 hover:border-emerald-300 px-4 py-2 rounded-xl text-emerald-700 hover:text-emerald-800 font-medium transition-all duration-200"
-              >
-                Go to Vendors
+            <>
+              <Link href="/vendors" className="text-gray-600 hover:text-gray-900 transition-colors">
+                My Vendors
               </Link>
-
-              <button
-                onClick={() => signOut()}
-                className="flex items-center gap-2 bg-red-50 hover:bg-red-100 border border-red-200 hover:border-red-300 px-4 py-2 rounded-xl text-red-600 hover:text-red-700 font-medium transition-all duration-200"
-              >
-                <LogOut size={16} />
-                Logout
-              </button>
-            </div>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3 px-4 py-2 rounded-xl bg-gray-50 border border-gray-200">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-emerald-500 to-blue-500 flex items-center justify-center">
+                    <User size={16} className="text-white" />
+                  </div>
+                  <span className="text-sm font-medium text-gray-700">{session.user?.name}</span>
+                </div>
+                <button
+                  onClick={() => signOut()}
+                  className="flex items-center gap-2 bg-red-50 hover:bg-red-100 border border-red-200 hover:border-red-300 px-4 py-2 rounded-xl text-red-600 hover:text-red-700 font-medium transition-all duration-200"
+                >
+                  <LogOut size={16} />
+                  Logout
+                </button>
+              </div>
+            </>
           ) : (
             <Link
               href="/api/auth/signin"
@@ -67,40 +68,44 @@ export default function Navbar() {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="sm:hidden mt-4 pt-4 border-t border-gray-200 space-y-3">
-          {session ? (
-            <>
-              <div className="flex items-center gap-3 px-3 py-2 rounded-xl bg-gray-50">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-emerald-500 to-blue-500 flex items-center justify-center">
-                  <User size={16} className="text-white" />
-                </div>
-                <span className="text-sm font-medium text-gray-700">{session.user?.name}</span>
-              </div>
-
-              {/* Go to Vendors Button - Mobile */}
-              <Link
-                href="/vendors"
-                className="block text-center bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-4 py-2.5 rounded-xl text-emerald-700 font-medium"
-              >
-                Go to Vendors
-              </Link>
-
-              <button
-                onClick={() => signOut()}
-                className="w-full flex items-center justify-center gap-2 bg-red-50 hover:bg-red-100 border border-red-200 px-4 py-2.5 rounded-xl text-red-600 font-medium"
-              >
-                <LogOut size={16} />
-                Logout
-              </button>
-            </>
-          ) : (
+        <div className="sm:hidden mt-4 pt-4 border-t border-gray-200">
+          <div className="space-y-3">
             <Link
-              href="/api/auth/signin"
-              className="block text-center bg-gradient-to-r from-emerald-500 to-blue-500 text-white px-6 py-2.5 rounded-xl font-medium"
+              href="/docs"
+              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors py-2"
             >
-              Login with Google
+              <FileText size={16} />
+              Documentation
             </Link>
-          )}
+
+            {session ? (
+              <>
+                <Link href="/vendors" className="block text-gray-600 hover:text-gray-900 transition-colors py-2">
+                  My Vendors
+                </Link>
+                <div className="flex items-center gap-3 px-3 py-2 rounded-xl bg-gray-50">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-emerald-500 to-blue-500 flex items-center justify-center">
+                    <User size={16} className="text-white" />
+                  </div>
+                  <span className="text-sm font-medium text-gray-700">{session.user?.name}</span>
+                </div>
+                <button
+                  onClick={() => signOut()}
+                  className="w-full flex items-center justify-center gap-2 bg-red-50 hover:bg-red-100 border border-red-200 px-4 py-2.5 rounded-xl text-red-600 font-medium"
+                >
+                  <LogOut size={16} />
+                  Logout
+                </button>
+              </>
+            ) : (
+              <Link
+                href="/api/auth/signin"
+                className="block text-center bg-gradient-to-r from-emerald-500 to-blue-500 text-white px-6 py-2.5 rounded-xl font-medium"
+              >
+                Login with Google
+              </Link>
+            )}
+          </div>
         </div>
       )}
     </nav>

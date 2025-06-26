@@ -10,6 +10,10 @@ const VendorSchema = new mongoose.Schema(
     city: { type: String },
     country: { type: String },
     zipCode: { type: String },
+    userId: {
+  type: String, 
+  required: true,
+},
   },
   { timestamps: true }
 );
